@@ -20,18 +20,18 @@ FetchContent_Declare(
   GIT_TAG             d56d92ed814d44f727812434142959a5d0e6db79 # v1.3.0
 )
 
-FetchContent_Declare(
-  vrs
-  GIT_REPOSITORY  https://github.com/facebookresearch/vrs.git
-  GIT_TAG        36b785597175ee8b6a0b291b203df4799522b65b # master July 24, 2024.
-)
+# FetchContent_Declare(
+#  vrs
+#  GIT_REPOSITORY  https://github.com/facebookresearch/vrs.git
+#  GIT_TAG        36b785597175ee8b6a0b291b203df4799522b65b # master July 24, 2024.
+#)
 # Override config for vrs
-option(UNIT_TESTS OFF)
-option(BUILD_SAMPLES OFF)
-option(BUILD_TOOLS OFF)
+# option(UNIT_TESTS OFF)
+# option(BUILD_SAMPLES OFF)
+# option(BUILD_TOOLS OFF)
 
-message("Pulling deps: {vrs}")
-FetchContent_MakeAvailable(vrs)
+# message("Pulling deps: {vrs}")
+# FetchContent_MakeAvailable(vrs)
 
 FetchContent_Declare(
   eigen

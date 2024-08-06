@@ -55,15 +55,21 @@ class CMakeBuild(build_ext):
             f"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY={extdir}",
             f"-DPYTHON_EXECUTABLE={sys.executable}",
             f"-DCMAKE_BUILD_TYPE={cfg}",  # not used on MSVC, but no harm
+            "-DINCLUDE_DIRS=C:/Program Files (x86)/vrs/include",
             "-DBUILD_PYTHON_BINDINGS=ON",
             "-DBUILD_UNIT_TEST=OFF",
             "-DPROJECTARIA_TOOLS_BUILD_TOOLS=OFF",
-            "-DPROJECTARIA_TOOLS_BUILD_PROJECTS=ON",
-            "-DPROJECTARIA_TOOLS_BUILD_PROJECTS_ADT=ON",
-            "-DPROJECTARIA_TOOLS_BUILD_PROJECTS_ASE=ON",
-            "-DPROJECTARIA_TOOLS_BUILD_PROJECTS_AEA=ON",
+            "-DPROJECTARIA_TOOLS_BUILD_PROJECTS=OFF",
+            "-DPROJECTARIA_TOOLS_BUILD_PROJECTS_ADT=OFF",
+            "-DPROJECTARIA_TOOLS_BUILD_PROJECTS_ASE=OFF",
+            "-DPROJECTARIA_TOOLS_BUILD_PROJECTS_AEA=OFF",
+			"-DCMAKE_TOOLCHAIN_FILE=D:/Projects/Code/vcpkg/scripts/buildsystems/vcpkg.cmake",
         ]
-        build_args = []
+		
+        build_args = [
+			"-DCMAKE_LIBRARY_PATH=D:/Projects/Code/vcpkg/installed/x64-windows/lib/",
+			"-DTARGET_LINK_LIBRARIES=fmt",
+		]
         # Adding CMake arguments set as environment variable
         # (needed e.g. to build for ARM OSx on conda-forge)
         if "CMAKE_ARGS" in os.environ:
@@ -95,12 +101,12 @@ class CMakeBuild(build_ext):
         if not os.path.exists(self.build_temp):
             os.makedirs(self.build_temp)
 
-        subprocess.check_call(
-            ["cmake", ext.sourcedir] + cmake_args, cwd=self.build_temp
-        )
-        subprocess.check_call(
-            ["cmake", "--build", "."] + build_args, cwd=self.build_temp
-        )
+        #subprocess.check_call(
+        #    ["cmake", ext.sourcedir] + cmake_args, cwd=self.build_temp
+        #)
+        #subprocess.check_call(
+        #    ["cmake", "--build", "."] + build_args, cwd=self.build_temp
+        #)
 
         # MSVC is putting pyd files in a subfolder
         # We are here setting them aside of the projectaria_tools build folder

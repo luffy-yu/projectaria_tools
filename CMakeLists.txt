@@ -27,11 +27,30 @@ if (NOT CMAKE_BUILD_TYPE AND NOT MSVC)
   set(CMAKE_BUILD_TYPE "Release")
 endif (NOT CMAKE_BUILD_TYPE AND NOT MSVC)
 
+include_directories("C:/Program Files (x86)/vrs/include")
+# include_directories("C:/Program Files (x86)/vrs/include/vrs")
+# include_directories("C:/Program Files (x86)/vrs/include/vrs/helpers")
+# include_directories("C:/Program Files (x86)/vrs/include/vrs/os")
+# Fix logging
+include_directories("C:/Program Files (x86)/vrs/include/vrs/oss")
+# include_directories("C:/Program Files (x86)/vrs/include/vrs/test")
+# include_directories("C:/Program Files (x86)/vrs/include/vrs/utils")
+include_directories("D:/Projects/Code/vcpkg/packages/fmt_x64-windows/include")
+
+link_directories("C:/Program Files (x86)/vrs/lib")
+link_directories("D:/Projects/Code/vcpkg/installed/x64-windows/lib")
+link_directories("D:/Projects/Code/vcpkg/packages/xxhash_x64-windows-vc142/lib")
+link_directories("D:/Projects/Code/vcpkg/packages/zstd_x64-windows-vc142/lib")
+link_directories("D:/Projects/Code/vcpkg/packages/lz4_x64-windows-vc142/lib")
+
+# fix dispenso
+add_definitions(-DNOMINMAX)
+
 # Project CMAKE options
 option(BUILD_PYTHON_BINDINGS "Build python binding." OFF)
 option(BUILD_UNIT_TEST "Build tests." OFF)
-option(PROJECTARIA_TOOLS_BUILD_PROJECTS "Build projects." OFF)
-option(PROJECTARIA_TOOLS_BUILD_TOOLS "Build tools." OFF)
+option(PROJECTARIA_TOOLS_BUILD_PROJECTS "Build projects." ON)
+option(PROJECTARIA_TOOLS_BUILD_TOOLS "Build tools." ON)
 
 if(BUILD_UNIT_TEST)
     enable_testing()
